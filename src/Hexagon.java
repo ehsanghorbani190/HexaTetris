@@ -6,8 +6,8 @@ class Hexagon {
     private final double WIDTH = 2 * SIDE;
     private final double HEIGHT = Math.sqrt(3) * SIDE;
     private final double DISTANCEX = 7.5;
-    private Double[] points = new Double[] { DISTANCEX, 0.0, DISTANCEX + SIDE, 0.0, WIDTH, HEIGHT / 2, DISTANCEX + SIDE, HEIGHT, DISTANCEX,
-            HEIGHT, 0.0, HEIGHT / 2 };
+    private Double[] points = new Double[] { DISTANCEX, HEIGHT/2, DISTANCEX + SIDE, HEIGHT/2, WIDTH, HEIGHT , DISTANCEX + SIDE, 3*HEIGHT/2, DISTANCEX,
+            3*HEIGHT/2, 0.0, HEIGHT  };
     private int x, y;
     private Polygon hexagon = new Polygon();
 
@@ -23,10 +23,10 @@ class Hexagon {
             if (i % 2 == 0)
                 points[i] += x*WIDTH*0.75;
             else
-                points[i] += (y + (x%2)/2.0)*HEIGHT ;
+                points[i] += (y - (x%2)/2.0)*HEIGHT ;
         }
         this.hexagon.getPoints().addAll(this.points);
-        this.hexagon.setStroke(Color.WHITE);
+        this.hexagon.setStroke(Color.GRAY);
     }
 
     /**

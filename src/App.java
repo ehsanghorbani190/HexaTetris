@@ -14,22 +14,16 @@ public class App extends Application {
     public void start(Stage stage){
         stage.setTitle("HexaTetris!");
         Pane root = new Pane();
-        Hexagon [][] a = new Hexagon[15][21];
+        Hexagon [][] gameBoard = new Hexagon[15][21];
         for (int i = 0; i < 15 ; i++) {
             for (int j = 0; j < 21 ; j++) {
-                a[i][j] = new Hexagon(i, j);
-                if(i==0 || i== 14 || j == 20) a[i][j].getHexagon().setFill(Color.ORANGE);
-                else {
-                    a[i][j].getHexagon().setFill(Color.DODGERBLUE);
-                    if(i%2==0||j%2==0) a[i][j].getHexagon().setOpacity(0.5);
-                    else a[i][j].getHexagon().setOpacity(0.75);
-                }
-                root.getChildren().add(a[i][j].getHexagon());   
+                gameBoard[i][j] = new Hexagon(i, j);
+                if(i==0 || i== 14 || j == 20) gameBoard[i][j].getHexagon().setFill(Color.ORANGE);
+                root.getChildren().add(gameBoard[i][j].getHexagon());   
             }    
         }
-        // Hexagon h = new Hexagon(7, 0);
-        // root.getChildren().add(h.getHexagon());
         Scene scene = new Scene(root);
+        scene.setFill(Color.BLACK);
         stage.setResizable(false);
         stage.setScene(scene);
         stage.show();
