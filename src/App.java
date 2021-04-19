@@ -46,7 +46,6 @@ public class App extends Application {
             public void handle(ActionEvent event) {
                 if (i > 0)
                     BOARD[2][i - 1].Off();
-                ;
                 BOARD[2][i].On(Color.RED);
                 if (i < 19)
                     i++;
