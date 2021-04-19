@@ -11,6 +11,7 @@ class Hexagon {
     private int x, y;
     private Polygon hexagon = new Polygon();
     private boolean on = false;
+    private int id;
     /**
      * @param points
      * @param x
@@ -26,7 +27,22 @@ class Hexagon {
                 points[i] += (y - (x % 2) / 2.0) * HEIGHT;
         }
         this.hexagon.getPoints().addAll(this.points);
-        this.hexagon.setStroke(Color.GRAY);
+        this.hexagon.setStroke(Color.WHITESMOKE);
+        this.hexagon.setStrokeWidth(2);
+    }
+
+    /**
+     * @return the id
+     */
+    public int getId() {
+        return id;
+    }
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(int id) {
+        this.id = id;
     }
 
     /**

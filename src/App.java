@@ -26,9 +26,10 @@ public class App extends Application {
         for (int i = 0; i < 15; i++) {
             for (int j = 0; j < 21; j++) {
                 BOARD[i][j] = new Hexagon(i, j);
-                if (i == 0 || i == 14 || j == 20)
+                if (i == 0 || i == 14 || j == 20) {
                     BOARD[i][j].On(Color.ORANGE);
-                else
+                    BOARD[i][j].setId(-2);
+                } else
                     BOARD[i][j].Off();
                 root.getChildren().add(BOARD[i][j].getHexagon());
             }
@@ -38,17 +39,13 @@ public class App extends Application {
         stage.setResizable(false);
         stage.setScene(scene);
         stage.show();
+        Hexamino h = new Hexamino(new int[][] { { 3, 2 }, { 2, 0 }, { 2, 1 }, { 1, 2 } } , Color.GREEN);
         // playing motions
-        Timeline play = new Timeline(new KeyFrame(Duration.seconds(0.5), new EventHandler<ActionEvent>() {
-            int i = 0;
-
+        Timeline play = new Timeline(new KeyFrame(Duration.seconds(1), new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                if (i > 0)
-                    BOARD[2][i - 1].Off();
-                BOARD[2][i].On(Color.RED);
-                if (i < 19)
-                    i++;
+
+                h.moveDown();
             }
         }));
         play.setCycleCount(Timeline.INDEFINITE);
