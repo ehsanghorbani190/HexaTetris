@@ -40,16 +40,18 @@ public class Hexamino {
 
     public void moveRight() {
         for (int[] point : points) {
-            if ((point[0] + 2 <= 14 && App.BOARD[point[0] + 2][point[1]].status()
-                    && id != App.BOARD[point[0] + 2][point[1]].getId())
-                    || (point[0] + 1 <= 14 && App.BOARD[point[0] + 1][point[1]].status()
-                            && id != App.BOARD[point[0] + 1][point[1]].getId()))
+            if (point[0] + 1 <= 14
+                    && (App.BOARD[point[0] + 1][point[1]].status() && id != App.BOARD[point[0] + 1][point[1]].getId())
+                    || (point[1] + 1 <= 20 && App.BOARD[point[0] + 1][point[1] + 1].status()
+                            && id != App.BOARD[point[0] + 1][point[1] + 1].getId()))
                 return;
         }
         for (int[] point : points) {
             App.BOARD[point[0]][point[1]].Off();
             App.BOARD[point[0]][point[1]].setId(-1);
-            point[0] += 2;
+            if (point[0] % 2 == 0)
+                point[1]++;
+            point[0]++;
         }
         for (int[] point : points) {
             App.BOARD[point[0]][point[1]].On(color);
@@ -59,20 +61,26 @@ public class Hexamino {
 
     public void moveLeft() {
         for (int[] point : points) {
-            if ((point[0] - 2 >= 0 && App.BOARD[point[0] - 2][point[1]].status()
-                    && id != App.BOARD[point[0] - 2][point[1]].getId())
-                    || (point[0] - 1 >= 0 && App.BOARD[point[0] - 1][point[1]].status()
-                            && id != App.BOARD[point[0] - 1][point[1]].getId()))
+            if (point[0] - 1 >= 0
+                    && (App.BOARD[point[0] - 1][point[1]].status() && id != App.BOARD[point[0] - 1][point[1]].getId())
+                    || (point[1] + 1 <= 20 && App.BOARD[point[0] - 1][point[1] + 1].status()
+                            && id != App.BOARD[point[0] - 1][point[1] + 1].getId()))
                 return;
         }
         for (int[] point : points) {
             App.BOARD[point[0]][point[1]].Off();
             App.BOARD[point[0]][point[1]].setId(-1);
-            point[0] -= 2;
+            if (point[0] % 2 == 0)
+                point[1]++;
+            point[0]--;
         }
         for (int[] point : points) {
             App.BOARD[point[0]][point[1]].On(color);
             App.BOARD[point[0]][point[1]].setId(id);
         }
+    }
+
+    public void rotate() {
+
     }
 }
