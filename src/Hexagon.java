@@ -10,7 +10,7 @@ class Hexagon {
             DISTANCEX + SIDE, 3 * HEIGHT / 2, DISTANCEX, 3 * HEIGHT / 2, 0.0, HEIGHT };
     private int x, y;
     private Polygon hexagon = new Polygon();
-
+    private boolean on = false;
     /**
      * @param points
      * @param x
@@ -49,5 +49,16 @@ class Hexagon {
         return x;
     }
 
+    public void On(Color color){
+        this.hexagon.setFill(color);
+        this.on = true;
+    }
     
+    public void Off(){
+        this.hexagon.setFill(Color.WHEAT);
+        this.on = false;
+    }
+    public boolean status(){
+        return this.on;
+    }
 }
