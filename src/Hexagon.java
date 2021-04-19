@@ -17,8 +17,8 @@ class Hexagon {
      * @param y
      */
     public Hexagon(int x, int y) {
-        this.setX(x);
-        this.setY(y);
+        this.x = x;
+        this.y = y;
         for (int i = 0; i < points.length; i++) {
             if (i % 2 == 0)
                 points[i] += x * WIDTH * 0.75;
@@ -35,14 +35,6 @@ class Hexagon {
     public Polygon getHexagon() {
         return hexagon;
     }
-
-    /**
-     * @param hexagon the hexagon to set
-     */
-    public void setHexagon(Polygon hexagon) {
-        this.hexagon = hexagon;
-    }
-
     /**
      * @return the y
      */
@@ -50,33 +42,12 @@ class Hexagon {
         return y;
     }
 
-    /**
-     * @param y the y to set
-     */
-    public void setY(int y) {
-        this.y = y;
-    }
-
-    /**
+        /**
      * @return the x
      */
     public int getX() {
         return x;
     }
 
-    /**
-     * @param x the x to set
-     */
-    public void setX(int x) {
-        this.x = x;
-    }
-
-    public void moveRight() {
-        if (this.x < 13) {
-            this.hexagon.setTranslateX(x * 0.75 * WIDTH);
-            this.hexagon.setTranslateY((x % 2) * WIDTH / 2.0);
-            this.x++;
-        }
-    }
-
+    
 }
