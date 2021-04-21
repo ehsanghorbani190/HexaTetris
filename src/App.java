@@ -61,6 +61,7 @@ public class App extends Application {
         scene.setOnKeyPressed(e -> {
             if(e.getCode() == KeyCode.D) hexamino.moveRight();
             else if(e.getCode() == KeyCode.A) hexamino.moveLeft();
+            else if(e.getCode() == KeyCode.S ) hexamino.moveDown(); 
         });
     }
 
