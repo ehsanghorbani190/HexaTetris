@@ -39,6 +39,8 @@ public class Hexamino {
     }
 
     public void moveRight() {
+        boolean even;
+        int min = points[0][1], index = 0;
         for (int[] point : points) {
             if (point[0] + 1 <= 14
                     && (App.BOARD[point[0] + 1][point[1]].status() && id != App.BOARD[point[0] + 1][point[1]].getId())
@@ -46,10 +48,21 @@ public class Hexamino {
                             && id != App.BOARD[point[0] + 1][point[1] + 1].getId()))
                 return;
         }
+        for (int i = 1; i < 4; i++) {
+            if (points[i][1] < min) {
+                index = i;
+                min = points[i][1];
+            } else if (points[i][1] == min && points[index][0] % 2 == 0) {
+                index = i;
+            }
+        }
+        even = (points[index][0] % 2 == 0) ? true : false;
         for (int[] point : points) {
             App.BOARD[point[0]][point[1]].Off();
             App.BOARD[point[0]][point[1]].setId(-1);
-            if (point[0] % 2 == 0)
+            if (even && point[0] % 2 == 1)
+                point[1]--;
+            else if (!even && point[0] % 2 == 0)
                 point[1]++;
             point[0]++;
         }
@@ -60,6 +73,8 @@ public class Hexamino {
     }
 
     public void moveLeft() {
+        boolean even;
+        int min = points[0][1], index = 0;
         for (int[] point : points) {
             if (point[0] - 1 >= 0
                     && (App.BOARD[point[0] - 1][point[1]].status() && id != App.BOARD[point[0] - 1][point[1]].getId())
@@ -67,10 +82,21 @@ public class Hexamino {
                             && id != App.BOARD[point[0] - 1][point[1] + 1].getId()))
                 return;
         }
+        for (int i = 1; i < 4; i++) {
+            if (points[i][1] < min) {
+                index = i;
+                min = points[i][1];
+            } else if (points[i][1] == min && points[index][0] % 2 == 0) {
+                index = i;
+            }
+        }
+        even = (points[index][0] % 2 == 0) ? true : false;
         for (int[] point : points) {
             App.BOARD[point[0]][point[1]].Off();
             App.BOARD[point[0]][point[1]].setId(-1);
-            if (point[0] % 2 == 0)
+            if (even && point[0] % 2 == 1)
+                point[1]--;
+            else if (!even && point[0] % 2 == 0)
                 point[1]++;
             point[0]--;
         }
