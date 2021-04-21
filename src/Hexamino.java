@@ -3,18 +3,46 @@ import java.util.Random;
 import javafx.scene.paint.Color;
 
 public class Hexamino {
-    private int[][] points = new int[4][2];
+    private int[][] points;
     private int id;
     private Color color;
 
     /**
      * @param points
      */
-    public Hexamino(int[][] points, Color color) {
-        this.points = points;
+    public Hexamino(int type) {
+        switch (type) {
+        case 0:
+            points = new int[][] { { 7, 1 }, { 7, 0 }, { 6, 0 }, { 8, 0 } };
+            color = Color.LIGHTGREEN;
+            break;
+        case 1:
+            points = new int[][] { { 7, 1 }, { 7, 0 }, { 6, 1 }, { 7, 2 } };
+            color = Color.LIGHTSKYBLUE;
+            break;
+        case 2:
+            points = new int[][] { { 7, 1 }, { 7, 0 }, { 6, 1 }, { 8, 1 } };
+            color = Color.TOMATO;
+            break;
+        case 3:
+            points = new int[][] { { 7, 0 }, { 9, 0 }, { 6, 0 }, { 8, 0 } };
+            color = Color.LIGHTPINK;
+            break;
+        case 4:
+            points = new int[][] { { 7, 1 }, { 7, 0 }, { 6, 1 }, { 5, 2 } };
+            color = Color.GOLD;
+            break;
+        case 5:
+            points = new int[][] { { 7, 0 }, { 7, 1 }, { 7, 2 }, { 7, 3 } };
+            color = Color.MAGENTA;
+            break;
+        case 6:
+            points = new int[][] { { 7, 1 }, { 7, 0 }, { 7, 2 }, { 8, 1 } };
+            color = Color.CHOCOLATE;
+            break;
+        }
         Random r = new Random();
         this.id = r.nextInt(7);
-        this.color = color;
     }
 
     public boolean make() {

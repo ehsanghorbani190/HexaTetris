@@ -27,29 +27,29 @@ public class App extends Application {
             for (int j = 0; j < 21; j++) {
                 BOARD[i][j] = new Hexagon(i, j);
                 if (i == 0 || i == 14 || j == 20) {
-                    BOARD[i][j].On(Color.ORANGE);
-                    BOARD[i][j].setId(-2);
+                    BOARD[i][j].On(Color.SADDLEBROWN,-2);
                 } else
-                    BOARD[i][j].Off();
+                    BOARD[i][j].Off(-1);
                 root.getChildren().add(BOARD[i][j].getHexagon());
             }
         }
         Scene scene = new Scene(root);
-        scene.setFill(Color.WHEAT);
+        scene.setFill(Color.BLACK);
         stage.setResizable(false);
         stage.setScene(scene);
         stage.show();
-        Hexamino h = new Hexamino(new int[][] { { 3, 2 }, { 2, 0 }, { 2, 1 }, { 1, 2 } } , Color.GREEN);
-        // playing motions
+        Hexamino h = new Hexamino(0);
+        h.make();
+        //playing motions
         Timeline play = new Timeline(new KeyFrame(Duration.seconds(1), new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-
-                h.moveDown();
+                h.moveLeft();
             }
         }));
         play.setCycleCount(Timeline.INDEFINITE);
         play.play();
+
     }
 
     /**
