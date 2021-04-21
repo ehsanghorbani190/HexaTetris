@@ -61,17 +61,22 @@ public class Hexamino {
             App.BOARD[point[0]][point[1]].Off(-1);
         }
     }
-
-    public void moveDown() {
+    public void stop(){
+        for (int[] point : points) {
+            App.BOARD[point[0]][point[1]].setId(-3);
+        }
+    }
+    public boolean moveDown() {
         for (int[] point : points) {
             if (point[1] + 1 <= 20 && App.BOARD[point[0]][point[1] + 1].status()
                     && id != App.BOARD[point[0]][point[1] + 1].getId())
-                return;
+                return false;
         }
         this.destroy();
         for (int[] point : points)
             point[1]++;
         this.make();
+        return true;
     }
 
     public void moveRight() {

@@ -1,9 +1,12 @@
+import java.util.Random;
+
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -16,7 +19,7 @@ import javafx.util.Duration;
 public class App extends Application {
     // GameBoard
     static final Hexagon[][] BOARD = new Hexagon[15][21];
-
+    static Hexamino hexamino ;
     @Override
     public void start(Stage stage) {
         stage.setTitle("HexaTetris!");
@@ -38,18 +41,27 @@ public class App extends Application {
         stage.setResizable(false);
         stage.setScene(scene);
         stage.show();
-        Hexamino h = new Hexamino(0);
-        h.make();
+        Random id = new Random();
+        hexamino = new Hexamino(id.nextInt(7));
+        hexamino.make();
         //playing motions
-        Timeline play = new Timeline(new KeyFrame(Duration.seconds(1), new EventHandler<ActionEvent>() {
+        Timeline goDown = new Timeline(new KeyFrame(Duration.seconds(1), new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                h.moveLeft();
+                boolean stoped = hexamino.moveDown();
+                if (!stoped) {
+                    hexamino.stop();
+                    hexamino = new Hexamino(id.nextInt(7));
+                    hexamino.make();
+                }
             }
         }));
-        play.setCycleCount(Timeline.INDEFINITE);
-        play.play();
-
+        goDown.setCycleCount(Timeline.INDEFINITE);
+        goDown.play();
+        scene.setOnKeyPressed(e -> {
+            if(e.getCode() == KeyCode.D) hexamino.moveRight();
+            else if(e.getCode() == KeyCode.A) hexamino.moveLeft();
+        });
     }
 
     /**
