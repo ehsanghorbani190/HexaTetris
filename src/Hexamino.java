@@ -15,9 +15,22 @@ public class Hexamino {
         Random r = new Random();
         this.id = r.nextInt(7);
         this.color = color;
+    }
+
+    public boolean make() {
+        for (int[] is : points) {
+            if (App.BOARD[is[0]][is[1]].getId() != -1)
+                return false;
+        }
         for (int[] point : points) {
-            App.BOARD[point[0]][point[1]].On(color);
-            App.BOARD[point[0]][point[1]].setId(this.id);
+            App.BOARD[point[0]][point[1]].On(color, this.id);
+        }
+        return true;
+    }
+
+    public void destroy() {
+        for (int[] point : points) {
+            App.BOARD[point[0]][point[1]].Off(-1);
         }
     }
 
@@ -27,15 +40,10 @@ public class Hexamino {
                     && id != App.BOARD[point[0]][point[1] + 1].getId())
                 return;
         }
-        for (int[] point : points) {
-            App.BOARD[point[0]][point[1]].Off();
-            App.BOARD[point[0]][point[1]].setId(-1);
+        this.destroy();
+        for (int[] point : points)
             point[1]++;
-        }
-        for (int[] point : points) {
-            App.BOARD[point[0]][point[1]].On(color);
-            App.BOARD[point[0]][point[1]].setId(id);
-        }
+        this.make();
     }
 
     public void moveRight() {
@@ -57,19 +65,15 @@ public class Hexamino {
             }
         }
         even = (points[index][0] % 2 == 0) ? true : false;
+        this.destroy();
         for (int[] point : points) {
-            App.BOARD[point[0]][point[1]].Off();
-            App.BOARD[point[0]][point[1]].setId(-1);
             if (even && point[0] % 2 == 1)
                 point[1]--;
             else if (!even && point[0] % 2 == 0)
                 point[1]++;
             point[0]++;
         }
-        for (int[] point : points) {
-            App.BOARD[point[0]][point[1]].On(color);
-            App.BOARD[point[0]][point[1]].setId(id);
-        }
+        this.make();
     }
 
     public void moveLeft() {
@@ -91,19 +95,15 @@ public class Hexamino {
             }
         }
         even = (points[index][0] % 2 == 0) ? true : false;
+        this.destroy();
         for (int[] point : points) {
-            App.BOARD[point[0]][point[1]].Off();
-            App.BOARD[point[0]][point[1]].setId(-1);
             if (even && point[0] % 2 == 1)
                 point[1]--;
             else if (!even && point[0] % 2 == 0)
                 point[1]++;
             point[0]--;
         }
-        for (int[] point : points) {
-            App.BOARD[point[0]][point[1]].On(color);
-            App.BOARD[point[0]][point[1]].setId(id);
-        }
+        this.make();
     }
 
     public void rotate() {

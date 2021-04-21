@@ -65,14 +65,16 @@ class Hexagon {
         return x;
     }
 
-    public void On(Color color){
+    public void On(Color color , int id){
         this.hexagon.setFill(color);
         this.on = true;
+        this.setId(id);
     }
     
-    public void Off(){
+    public void Off(int id){
         this.hexagon.setFill(Color.WHEAT);
         this.on = false;
+        this.setId(id);
     }
     public boolean status(){
         return this.on;
