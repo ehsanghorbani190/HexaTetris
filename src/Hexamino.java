@@ -47,8 +47,8 @@ public class Hexamino {
 
     public boolean make() {
         for (int[] point : points) {
-            if (point[0] <= 0 || point[0] >= 14 || point[1] < 0
-                    || point[1] >= 20 || App.BOARD[point[0]][point[1]].getId() != -1 )
+            if (point[0] <= 0 || point[0] >= 14 || point[1] < 0 || point[1] >= 20
+                    || App.BOARD[point[0]][point[1]].getId() != -1)
                 return false;
         }
         for (int[] point : points) {
@@ -85,13 +85,6 @@ public class Hexamino {
     public void moveRight() {
         boolean even;
         int min = points[0][1], index = 0;
-        for (int[] point : points) {
-            if (point[0] + 1 <= 14
-                    && (App.BOARD[point[0] + 1][point[1]].status() && id != App.BOARD[point[0] + 1][point[1]].getId())
-                    || (point[1] + 1 <= 20 && App.BOARD[point[0] + 1][point[1] + 1].status()
-                            && id != App.BOARD[point[0] + 1][point[1] + 1].getId()))
-                return;
-        }
         for (int i = 1; i < 4; i++) {
             if (points[i][1] < min) {
                 index = i;
@@ -101,6 +94,11 @@ public class Hexamino {
             }
         }
         even = (points[index][0] % 2 == 0) ? true : false;
+        int[][] temp = new int[4][2];
+        for (int i = 0; i < 4; i++) {
+            temp[i][0] = points[i][0];
+            temp[i][1] = points[i][1];
+        }
         this.destroy();
         for (int[] point : points) {
             if (even && point[0] % 2 == 1)
@@ -109,19 +107,18 @@ public class Hexamino {
                 point[1]++;
             point[0]++;
         }
-        this.make();
+        if (!this.make()) {
+            for (int i = 0; i < 4; i++) {
+                points[i][0] = temp[i][0];
+                points[i][1] = temp[i][1];
+            }
+            this.make();
+        }
     }
 
     public void moveLeft() {
         boolean even;
         int min = points[0][1], index = 0;
-        for (int[] point : points) {
-            if (point[0] - 1 >= 0
-                    && (App.BOARD[point[0] - 1][point[1]].status() && id != App.BOARD[point[0] - 1][point[1]].getId())
-                    || (point[1] + 1 <= 20 && App.BOARD[point[0] - 1][point[1] + 1].status()
-                            && id != App.BOARD[point[0] - 1][point[1] + 1].getId()))
-                return;
-        }
         for (int i = 1; i < 4; i++) {
             if (points[i][1] < min) {
                 index = i;
@@ -131,6 +128,11 @@ public class Hexamino {
             }
         }
         even = (points[index][0] % 2 == 0) ? true : false;
+        int[][] temp = new int[4][2];
+        for (int i = 0; i < 4; i++) {
+            temp[i][0] = points[i][0];
+            temp[i][1] = points[i][1];
+        }
         this.destroy();
         for (int[] point : points) {
             if (even && point[0] % 2 == 1)
@@ -139,12 +141,18 @@ public class Hexamino {
                 point[1]++;
             point[0]--;
         }
-        this.make();
+        if (!this.make()) {
+            for (int i = 0; i < 4; i++) {
+                points[i][0] = temp[i][0];
+                points[i][1] = temp[i][1];
+            }
+            this.make();
+        }
     }
 
     public void rotate() {
         int x = points[0][0], y = points[0][1], even = x % 2, Xdis, Ydis;
-        int [][] temp = new int[4][2];
+        int[][] temp = new int[4][2];
         for (int i = 0; i < 4; i++) {
             temp[i][0] = points[i][0];
             temp[i][1] = points[i][1];
@@ -206,12 +214,12 @@ public class Hexamino {
                 }
             }
         }
-        if(!this.make()){
+        if (!this.make()) {
             for (int i = 0; i < 4; i++) {
                 points[i][0] = temp[i][0];
                 points[i][1] = temp[i][1];
             }
             this.make();
-        };
+        }
     }
 }
