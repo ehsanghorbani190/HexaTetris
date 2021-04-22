@@ -46,8 +46,9 @@ public class Hexamino {
     }
 
     public boolean make() {
-        for (int[] is : points) {
-            if (App.BOARD[is[0]][is[1]].getId() != -1)
+        for (int[] point : points) {
+            if (point[0] <= 0 || point[0] >= 14 || point[1] < 0
+                    || point[1] >= 20 || App.BOARD[point[0]][point[1]].getId() != -1 )
                 return false;
         }
         for (int[] point : points) {
@@ -143,6 +144,11 @@ public class Hexamino {
 
     public void rotate() {
         int x = points[0][0], y = points[0][1], even = x % 2, Xdis, Ydis;
+        int [][] temp = new int[4][2];
+        for (int i = 0; i < 4; i++) {
+            temp[i][0] = points[i][0];
+            temp[i][1] = points[i][1];
+        }
         this.destroy();
         for (int i = 1; i < points.length; i++) {
             Xdis = x - points[i][0];
@@ -200,10 +206,12 @@ public class Hexamino {
                 }
             }
         }
-        this.make();
-        for (int[] point : points) {
-            System.out.println(point[0] + " " + point[1]);
-        }
-        System.out.println("*****");
+        if(!this.make()){
+            for (int i = 0; i < 4; i++) {
+                points[i][0] = temp[i][0];
+                points[i][1] = temp[i][1];
+            }
+            this.make();
+        };
     }
 }
