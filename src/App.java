@@ -75,6 +75,8 @@ public class App extends Application {
                 hexamino.moveLeft();
             else if (e.getCode() == KeyCode.S)
                 hexamino.moveDown();
+            else if(e.getCode() == KeyCode.W)
+                hexamino.rotate();
         });
     }
 

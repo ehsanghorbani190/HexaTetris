@@ -33,7 +33,7 @@ public class Hexamino {
             color = Color.GOLD;
             break;
         case 5:
-            points = new int[][] { { 7, 0 }, { 7, 1 }, { 7, 2 }, { 7, 3 } };
+            points = new int[][] { { 7, 1 }, { 7, 0 }, { 7, 2 }, { 7, 3 } };
             color = Color.MAGENTA;
             break;
         case 6:
@@ -61,11 +61,13 @@ public class Hexamino {
             App.BOARD[point[0]][point[1]].Off(-1);
         }
     }
-    public void stop()  {
+
+    public void stop() {
         for (int[] point : points) {
             App.BOARD[point[0]][point[1]].setId(-3);
         }
     }
+
     public boolean moveDown() {
         for (int[] point : points) {
             if (point[1] + 1 <= 20 && App.BOARD[point[0]][point[1] + 1].status()
@@ -148,22 +150,53 @@ public class Hexamino {
             if (Xdis == 1) {
                 if (Ydis == even) {
                     points[i][0]++;
-                    points[i][1]+= even - 1;
-                } else if(Ydis == even - 1){
+                    points[i][1] += even - 1;
+                } else if (Ydis == even - 1) {
                     points[i][1]--;
+                } else if (Ydis == even + 1)
+                    points[i][0] += 2;
+                else if (Ydis == even - 2) {
+                    points[i][0]--;
+                    points[i][1] += even - 2;
                 }
-            } else if(Xdis == 0){
-                if (Ydis ==  1 || Ydis == -1) {
-                    points[i][0]+= Ydis;
-                    points[i][1]+= (Ydis > 0) ? 1 - even : -even;
-                } 
-            }
-            else if(Xdis == -1){
+            } else if (Xdis == 0) {
+                if (Ydis == 1 || Ydis == -1) {
+                    points[i][0] += Ydis;
+                    points[i][1] += (Ydis > 0) ? 1 - even : -even;
+                } else if (Ydis == 2 || Ydis == -2) {
+                    points[i][0] += Ydis;
+                    points[i][1] += Ydis / 2;
+                }
+            } else if (Xdis == -1) {
                 if (Ydis == even) {
                     points[i][1]++;
-                } else if(Ydis == even - 1){
+                } else if (Ydis == even - 1) {
                     points[i][0]--;
-                    points[i][1] +=  even;
+                    points[i][1] += even;
+                } else if (Ydis == even + 1) {
+                    points[i][0]++;
+                    points[i][1] += 1 + even;
+                } else if (Ydis == even - 2)
+                    points[i][0] -= 2;
+            } else if (Xdis == 2) {
+                if (Ydis == 1) {
+                    points[i][1]--;
+                    points[i][0] += Xdis;
+                } else if (Ydis == 0) {
+                    points[i][0]++;
+                    points[i][1] -= 1 + even;
+                } else {
+                    points[i][1] -= Xdis;
+                }
+            } else if (Xdis == -2) {
+                if (Ydis == -1) {
+                    points[i][1]++;
+                    points[i][0] += Xdis;
+                } else if (Ydis == 0) {
+                    points[i][0]--;
+                    points[i][1] += 2 - even;
+                } else {
+                    points[i][1] -= Xdis;
                 }
             }
         }
