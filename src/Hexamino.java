@@ -61,7 +61,7 @@ public class Hexamino {
             App.BOARD[point[0]][point[1]].Off(-1);
         }
     }
-    public void stop(){
+    public void stop()  {
         for (int[] point : points) {
             App.BOARD[point[0]][point[1]].setId(-3);
         }
@@ -140,6 +140,37 @@ public class Hexamino {
     }
 
     public void rotate() {
-
+        int x = points[0][0], y = points[0][1], even = x % 2, Xdis, Ydis;
+        this.destroy();
+        for (int i = 1; i < points.length; i++) {
+            Xdis = x - points[i][0];
+            Ydis = y - points[i][1];
+            if (Xdis == 1) {
+                if (Ydis == even) {
+                    points[i][0]++;
+                    points[i][1]+= even - 1;
+                } else if(Ydis == even - 1){
+                    points[i][1]--;
+                }
+            } else if(Xdis == 0){
+                if (Ydis ==  1 || Ydis == -1) {
+                    points[i][0]+= Ydis;
+                    points[i][1]+= (Ydis > 0) ? 1 - even : -even;
+                } 
+            }
+            else if(Xdis == -1){
+                if (Ydis == even) {
+                    points[i][1]++;
+                } else if(Ydis == even - 1){
+                    points[i][0]--;
+                    points[i][1] +=  even;
+                }
+            }
+        }
+        this.make();
+        for (int[] point : points) {
+            System.out.println(point[0] + " " + point[1]);
+        }
+        System.out.println("*****");
     }
 }
