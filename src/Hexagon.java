@@ -12,6 +12,7 @@ class Hexagon {
     private Polygon hexagon = new Polygon();
     private boolean on = false;
     private int id;
+    private Color color;
     /**
      * @param points
      * @param x
@@ -29,6 +30,20 @@ class Hexagon {
         this.hexagon.getPoints().addAll(this.points);
         this.hexagon.setStroke(Color.BLACK);
         this.hexagon.setStrokeWidth(2);
+    }
+
+    /**
+     * @return the color
+     */
+    public Color getColor() {
+        return color;
+    }
+
+    /**
+     * @param color the color to set
+     */
+    public void setColor(Color color) {
+        this.color = color;
     }
 
     /**
@@ -67,12 +82,14 @@ class Hexagon {
 
     public void On(Color color , int id){
         this.hexagon.setFill(color);
+        this.setColor(color);
         this.on = true;
         this.setId(id);
     }
     
     public void Off(int id){
         this.hexagon.setFill(Color.BLACK);
+        this.setColor(Color.BLACK);
         this.on = false;
         this.setId(id);
     }
