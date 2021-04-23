@@ -5,9 +5,13 @@ import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -21,7 +25,7 @@ public class App extends Application {
     static final Hexagon[][] BOARD = new Hexagon[15][21];
     static Hexamino hexamino;
     static int score;
-
+    Timeline goDown;
     @Override
     public void start(Stage stage) {
         stage.setTitle("HexaTetris!");
@@ -47,7 +51,7 @@ public class App extends Application {
         hexamino = new Hexamino(id.nextInt(7));
         hexamino.make();
         // playing motions
-        Timeline goDown = new Timeline(new KeyFrame(Duration.seconds(1), new EventHandler<ActionEvent>() {
+        goDown = new Timeline(new KeyFrame(Duration.seconds(1), new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 boolean stoped = hexamino.moveDown();
@@ -62,7 +66,21 @@ public class App extends Application {
                     } while (row != -1);
 
                     hexamino = new Hexamino(id.nextInt(7));
-                    hexamino.make();
+                    if(!hexamino.make()) {
+                        hexamino.stop();
+                        goDown.stop();
+                        VBox box = new VBox();
+                        box.setAlignment(Pos.CENTER);
+                        box.setPadding(new Insets(15,15,15,15));
+                        Label l1 = new Label("Game Over!");
+                        l1.setStyle("-fx-font: 20 sans-serif");
+                        Label l2 = new Label("Thanks for playing! You Scored "+ score +"!");
+                        l2.setStyle("-fx-font: 20 serif");
+                        box.getChildren().addAll(l1,l2);
+                        Scene s = new Scene(box);
+                        stage.setScene(s);
+                        stage.setTitle("The End!");
+                    }
                 }
             }
         }));
