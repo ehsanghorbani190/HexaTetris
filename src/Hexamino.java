@@ -82,7 +82,7 @@ public class Hexamino {
         return true;
     }
 
-    public void moveRight() {
+    public void move(char way) {
         boolean even;
         int min = points[0][1], index = 0;
         for (int i = 1; i < 4; i++) {
@@ -105,41 +105,10 @@ public class Hexamino {
                 point[1]--;
             else if (!even && point[0] % 2 == 0)
                 point[1]++;
-            point[0]++;
-        }
-        if (!this.make()) {
-            for (int i = 0; i < 4; i++) {
-                points[i][0] = temp[i][0];
-                points[i][1] = temp[i][1];
-            }
-            this.make();
-        }
-    }
-
-    public void moveLeft() {
-        boolean even;
-        int min = points[0][1], index = 0;
-        for (int i = 1; i < 4; i++) {
-            if (points[i][1] < min) {
-                index = i;
-                min = points[i][1];
-            } else if (points[i][1] == min && points[index][0] % 2 == 0) {
-                index = i;
-            }
-        }
-        even = (points[index][0] % 2 == 0) ? true : false;
-        int[][] temp = new int[4][2];
-        for (int i = 0; i < 4; i++) {
-            temp[i][0] = points[i][0];
-            temp[i][1] = points[i][1];
-        }
-        this.destroy();
-        for (int[] point : points) {
-            if (even && point[0] % 2 == 1)
-                point[1]--;
-            else if (!even && point[0] % 2 == 0)
-                point[1]++;
-            point[0]--;
+            if (way == 'R')
+                point[0]++;
+            else
+                point[0]--;
         }
         if (!this.make()) {
             for (int i = 0; i < 4; i++) {

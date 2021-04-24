@@ -12,6 +12,7 @@ class Hexagon {
     private boolean on = false;
     private int id;
     private Color color;
+
     /**
      * @param points
      * @param x
@@ -63,20 +64,22 @@ class Hexagon {
     public Polygon getHexagon() {
         return hexagon;
     }
-    public void On(Color color , int id){
+
+    public void On(Color color, int id) {
         this.hexagon.setFill(color);
         this.setColor(color);
         this.on = true;
         this.setId(id);
     }
-    
-    public void Off(int id){
+
+    public void Off(int id) {
         this.hexagon.setFill(Color.BLACK);
         this.setColor(Color.BLACK);
         this.on = false;
         this.setId(id);
     }
-    public boolean status(){
+
+    public boolean status() {
         return this.on;
     }
 }

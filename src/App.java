@@ -88,9 +88,9 @@ public class App extends Application {
         goDown.play();
         scene.setOnKeyPressed(e -> {
             if (e.getCode() == KeyCode.D)
-                hexamino.moveRight();
+                hexamino.move('R');
             else if (e.getCode() == KeyCode.A)
-                hexamino.moveLeft();
+                hexamino.move('L');
             else if (e.getCode() == KeyCode.S)
                 hexamino.moveDown();
             else if(e.getCode() == KeyCode.W)
