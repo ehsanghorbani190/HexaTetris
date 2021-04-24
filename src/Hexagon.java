@@ -8,7 +8,6 @@ class Hexagon {
     private final double DISTANCEX = 7.5;
     private Double[] points = new Double[] { DISTANCEX, HEIGHT / 2, DISTANCEX + SIDE, HEIGHT / 2, WIDTH, HEIGHT,
             DISTANCEX + SIDE, 3 * HEIGHT / 2, DISTANCEX, 3 * HEIGHT / 2, 0.0, HEIGHT };
-    private int x, y;
     private Polygon hexagon = new Polygon();
     private boolean on = false;
     private int id;
@@ -19,8 +18,6 @@ class Hexagon {
      * @param y
      */
     public Hexagon(int x, int y) {
-        this.x = x;
-        this.y = y;
         for (int i = 0; i < points.length; i++) {
             if (i % 2 == 0)
                 points[i] += x * WIDTH * 0.75;
@@ -66,20 +63,6 @@ class Hexagon {
     public Polygon getHexagon() {
         return hexagon;
     }
-    /**
-     * @return the y
-     */
-    public int getY() {
-        return y;
-    }
-
-        /**
-     * @return the x
-     */
-    public int getX() {
-        return x;
-    }
-
     public void On(Color color , int id){
         this.hexagon.setFill(color);
         this.setColor(color);
