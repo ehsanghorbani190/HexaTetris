@@ -26,7 +26,7 @@ class Hexagon {
                 points[i] += (y - (x % 2) / 2.0) * HEIGHT;
         }
         this.hexagon.getPoints().addAll(this.points);
-        this.hexagon.setStroke(Color.BLACK);
+        this.hexagon.setStroke(App.bgcolor);
         this.hexagon.setStrokeWidth(2);
     }
 
@@ -73,8 +73,8 @@ class Hexagon {
     }
 
     public void Off(int id) {
-        this.hexagon.setFill(Color.BLACK);
-        this.setColor(Color.BLACK);
+        this.hexagon.setFill(App.bgcolor);
+        this.setColor(App.bgcolor);
         this.on = false;
         this.setId(id);
     }

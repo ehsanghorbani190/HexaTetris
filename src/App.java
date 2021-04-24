@@ -25,6 +25,7 @@ public class App extends Application {
     static final Hexagon[][] BOARD = new Hexagon[15][21];
     static Hexamino hexamino;
     static int score;
+    static final Color bgcolor = Color.rgb(53, 59, 72);
     Timeline goDown;
     @Override
     public void start(Stage stage) {
@@ -36,14 +37,14 @@ public class App extends Application {
             for (int j = 0; j < 21; j++) {
                 BOARD[i][j] = new Hexagon(i, j);
                 if (i == 0 || i == 14 || j == 20) {
-                    BOARD[i][j].On(Color.SADDLEBROWN, -2);
+                    BOARD[i][j].On(Color.rgb(254, 211, 48), -2);
                 } else
                     BOARD[i][j].Off(-1);
                 root.getChildren().add(BOARD[i][j].getHexagon());
             }
         }
         Scene scene = new Scene(root);
-        scene.setFill(Color.BLACK);
+        scene.setFill(bgcolor);
         stage.setResizable(false);
         stage.setScene(scene);
         stage.show();
