@@ -14,31 +14,31 @@ public class Hexamino {
         switch (type) {
         case 0:
             points = new int[][] { { 7, 1 }, { 7, 0 }, { 6, 0 }, { 8, 0 } };
-            color = Color.LIGHTGREEN;
+            color = Color.rgb(38, 222, 129);
             break;
         case 1:
             points = new int[][] { { 7, 1 }, { 7, 0 }, { 6, 1 }, { 7, 2 } };
-            color = Color.LIGHTSKYBLUE;
+            color = Color.rgb(0, 216, 214);
             break;
         case 2:
             points = new int[][] { { 7, 1 }, { 7, 0 }, { 6, 1 }, { 8, 1 } };
-            color = Color.TOMATO;
+            color = Color.rgb(255, 56, 56);
             break;
         case 3:
             points = new int[][] { { 7, 0 }, { 9, 0 }, { 6, 0 }, { 8, 0 } };
-            color = Color.LIGHTPINK;
+            color = Color.rgb(246, 229, 141);
             break;
         case 4:
             points = new int[][] { { 7, 1 }, { 7, 0 }, { 6, 1 }, { 5, 2 } };
-            color = Color.GOLD;
+            color = Color.rgb(255, 159, 26);
             break;
         case 5:
             points = new int[][] { { 7, 1 }, { 7, 0 }, { 7, 2 }, { 7, 3 } };
-            color = Color.MAGENTA;
+            color = Color.rgb(252, 66, 123);
             break;
         case 6:
             points = new int[][] { { 7, 1 }, { 7, 0 }, { 7, 2 }, { 8, 1 } };
-            color = Color.CHOCOLATE;
+            color = Color.rgb(225, 95, 65);
             break;
         }
         Random r = new Random();
