@@ -27,22 +27,14 @@ public class App extends Application {
     static int score;
     static final Color bgcolor = Color.rgb(53, 59, 72);
     Timeline goDown;
+
     @Override
     public void start(Stage stage) {
         stage.setTitle("HexaTetris!");
 
         Pane root = new Pane();
         // Initializing GameBoard
-        for (int i = 0; i < 15; i++) {
-            for (int j = 0; j < 21; j++) {
-                BOARD[i][j] = new Hexagon(i, j);
-                if (i == 0 || i == 14 || j == 20) {
-                    BOARD[i][j].On(Color.rgb(254, 211, 48), -2);
-                } else
-                    BOARD[i][j].Off(-1);
-                root.getChildren().add(BOARD[i][j].getHexagon());
-            }
-        }
+        init(root);
         Scene scene = new Scene(root);
         scene.setFill(bgcolor);
         stage.setResizable(false);
@@ -60,27 +52,17 @@ public class App extends Application {
                     hexamino.stop();
                     int row = rowFill();
                     do {
-                        if (row != -1){
+                        if (row != -1) {
                             gainScore(row);
                         }
                         row = rowFill();
                     } while (row != -1);
 
                     hexamino = new Hexamino(id.nextInt(7));
-                    if(!hexamino.make()) {
+                    if (!hexamino.make()) {
                         hexamino.stop();
                         goDown.stop();
-                        VBox box = new VBox();
-                        box.setAlignment(Pos.CENTER);
-                        box.setPadding(new Insets(15,15,15,15));
-                        Label l1 = new Label("Game Over!");
-                        l1.setStyle("-fx-font: 20 sans-serif");
-                        Label l2 = new Label("Thanks for playing! You Scored "+ score +"!");
-                        l2.setStyle("-fx-font: 20 serif");
-                        box.getChildren().addAll(l1,l2);
-                        Scene s = new Scene(box);
-                        stage.setScene(s);
-                        stage.setTitle("The End!");
+                        end(stage);
                     }
                 }
             }
@@ -94,7 +76,7 @@ public class App extends Application {
                 hexamino.move('L');
             else if (e.getCode() == KeyCode.S)
                 hexamino.moveDown();
-            else if(e.getCode() == KeyCode.W)
+            else if (e.getCode() == KeyCode.W)
                 hexamino.rotate();
         });
     }
@@ -134,5 +116,32 @@ public class App extends Application {
             }
         }
         score += 10;
+    }
+
+    public void end(Stage stage) {
+        VBox box = new VBox();
+        box.setAlignment(Pos.CENTER);
+        box.setPadding(new Insets(15, 15, 15, 15));
+        Label l1 = new Label("Game Over!");
+        l1.setStyle("-fx-font: 20 sans-serif");
+        Label l2 = new Label("Thanks for playing! You Scored " + score + "!");
+        l2.setStyle("-fx-font: 20 serif");
+        box.getChildren().addAll(l1, l2);
+        Scene s = new Scene(box);
+        stage.setScene(s);
+        stage.setTitle("The End!");
+    }
+
+    public void init(Pane root) {
+        for (int i = 0; i < 15; i++) {
+            for (int j = 0; j < 21; j++) {
+                BOARD[i][j] = new Hexagon(i, j);
+                if (i == 0 || i == 14 || j == 20) {
+                    BOARD[i][j].On(Color.rgb(254, 211, 48), -2);
+                } else
+                    BOARD[i][j].Off(-1);
+                root.getChildren().add(BOARD[i][j].getHexagon());
+            }
+        }
     }
 }
