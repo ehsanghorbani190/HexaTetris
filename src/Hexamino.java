@@ -86,19 +86,14 @@ public class Hexamino {
         boolean even;
         int min = points[0][1], index = 0;
         for (int i = 1; i < 4; i++) {
-            if (points[i][1] < min) {
+            if (points[i][1] < min || points[i][1] == min && points[index][0] % 2 == 0) {
                 index = i;
-                min = points[i][1];
-            } else if (points[i][1] == min && points[index][0] % 2 == 0) {
-                index = i;
+                min = (points[i][1] < min) ? points[i][1] : min;
             }
         }
         even = (points[index][0] % 2 == 0) ? true : false;
         int[][] temp = new int[4][2];
-        for (int i = 0; i < 4; i++) {
-            temp[i][0] = points[i][0];
-            temp[i][1] = points[i][1];
-        }
+        hardCopy(points, temp);
         this.destroy();
         for (int[] point : points) {
             if (even && point[0] % 2 == 1)
@@ -111,10 +106,7 @@ public class Hexamino {
                 point[0]--;
         }
         if (!this.make()) {
-            for (int i = 0; i < 4; i++) {
-                points[i][0] = temp[i][0];
-                points[i][1] = temp[i][1];
-            }
+            hardCopy(temp, points);
             this.make();
         }
     }
@@ -122,10 +114,7 @@ public class Hexamino {
     public void rotate() {
         int x = points[0][0], y = points[0][1], even = x % 2, Xdis, Ydis;
         int[][] temp = new int[4][2];
-        for (int i = 0; i < 4; i++) {
-            temp[i][0] = points[i][0];
-            temp[i][1] = points[i][1];
-        }
+        hardCopy(points, temp);
         this.destroy();
         for (int i = 1; i < points.length; i++) {
             Xdis = x - points[i][0];
@@ -184,11 +173,15 @@ public class Hexamino {
             }
         }
         if (!this.make()) {
-            for (int i = 0; i < 4; i++) {
-                points[i][0] = temp[i][0];
-                points[i][1] = temp[i][1];
-            }
+            hardCopy(temp, points);
             this.make();
+        }
+    }
+
+    public static void hardCopy(int[][] a, int[][] b) {
+        for (int i = 0; i < 4; i++) {
+            b[i][0] = a[i][0];
+            b[i][1] = a[i][1];
         }
     }
 }
