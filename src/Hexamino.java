@@ -26,7 +26,7 @@ public class Hexamino {
             break;
         case 3:
             points = new int[][] { { 7, 0 }, { 9, 0 }, { 6, 0 }, { 8, 0 } };
-            color = Color.rgb(197, 108, 240);
+            color = Color.rgb(84, 109, 229);
             break;
         case 4:
             points = new int[][] { { 7, 1 }, { 7, 0 }, { 6, 1 }, { 5, 2 } };
@@ -38,7 +38,7 @@ public class Hexamino {
             break;
         case 6:
             points = new int[][] { { 7, 1 }, { 7, 0 }, { 7, 2 }, { 8, 1 } };
-            color = Color.rgb(75, 75, 75);
+            color = Color.rgb(202, 211, 200);
             break;
         }
         Random r = new Random();
