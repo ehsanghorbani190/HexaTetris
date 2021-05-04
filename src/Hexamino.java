@@ -30,7 +30,7 @@ public class Hexamino {
             break;
         case 4:
             points = new int[][] { { 7, 1 }, { 7, 0 }, { 6, 1 }, { 5, 2 } };
-            color = Color.rgb(255, 159, 26);
+            color = Color.rgb(255, 121, 63);
             break;
         case 5:
             points = new int[][] { { 7, 1 }, { 7, 0 }, { 7, 2 }, { 7, 3 } };
