@@ -91,12 +91,16 @@ public class App extends Application {
     public int rowFill() {
         int row = -1;
         for (int i = 0; i < 20; i++) {
+            boolean isFilled = true;
             for (int j = 1; j < 14; j++) {
                 if (BOARD[j][i].getId() != -3) {
-                    row = -1;
+                    isFilled = false;
                     break;
-                } else
-                    row = i;
+                }
+            }
+            if (isFilled) {
+                row = i;
+                break;
             }
         }
         return row;
